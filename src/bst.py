@@ -123,6 +123,65 @@ class BinTree(object):
             r_depth = self.depth(start.right)
         return l_depth - r_depth
 
+    def in_order(self, node=None):
+        """Traverse the list in order."""
+        if not node:
+            node = self._root
+            if not node:
+                yield None
+        if node.left:
+            for each_val in self.in_order(node.left):
+                yield each_val
+        yield node.val
+        if node.right:
+            for each_val in self.in_order(node.right):
+                yield each_val
+
+    def pre_order(self, node=None):
+        """Traverse the list in pre-order."""
+        if not node:
+            node = self._root
+            if not node:
+                yield None
+        yield node.val
+        if node.left:
+            for each_val in self.in_order(node.left):
+                yield each_val
+        if node.right:
+            for each_val in self.in_order(node.right):
+                yield each_val
+
+    def post_order(self, node=None):
+        """Traverse the list in post-order."""
+        if not node:
+            node = self._root
+            if not node:
+                yield None
+        if node.left:
+            for each_val in self.in_order(node.left):
+                yield each_val
+        if node.right:
+            for each_val in self.in_order(node.right):
+                yield each_val
+        yield node.val
+
+    def breadth_first(self):
+        """Perform a BFT on the BST."""
+        if not self._root:
+            yield None
+        yield self._root.val
+        traverse = []
+        if self._root.left:
+            traverse.append(self._root.left)
+        if self._root.right:
+            traverse.append(self._root.right)
+        for node in traverse:
+            yield node.val
+            if node.left:
+                traverse.append(node.left)
+            if node.right:
+                traverse.append(node.right)
+
 
 if __name__ == '__main__':
     pass
