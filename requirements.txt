@@ -1,0 +1,16 @@
+-e git+https://github.com/kurtrm/data_structs.git@d514444ae6186aa53a34d31a02a52e51ede00a74#egg=Data_Structs
+decorator==4.0.11
+ipython==6.1.0
+ipython-genutils==0.2.0
+jedi==0.10.2
+pexpect==4.2.1
+pickleshare==0.7.4
+prompt-toolkit==1.0.14
+ptyprocess==0.5.1
+py==1.4.34
+Pygments==2.2.0
+pytest==3.1.2
+simplegeneric==0.8.1
+six==1.10.0
+traitlets==4.3.2
+wcwidth==0.1.7
