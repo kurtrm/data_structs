@@ -21,7 +21,7 @@ class BinTree(object):
         if type(val) in [list, tuple]:
             for item in val:
                 self.insert(item)
-        elif not val:
+        elif val:
             raise ValueError('BST only accepts optional parameter or a list or tuple')
 
     def insert(self, val):
@@ -121,7 +121,6 @@ class BinTree(object):
             l_depth = self.depth(start.left)
         if start.right:
             r_depth = self.depth(start.right)
-
         return l_depth - r_depth
 
 

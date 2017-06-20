@@ -15,7 +15,7 @@ def binary_tree():
 def bigger_binary_tree():
     """Larger binary tree for testing."""
     from bst import BinTree
-    new_tree = BinTree([8, 2, 3, 1, 7, 9])
+    new_tree = BinTree([8, 2, 3, 1, 7, 9, 10])
     return new_tree
 
 
@@ -187,7 +187,7 @@ def test_contains(bigger_binary_tree):
 
 def test_balance(bigger_binary_tree, binary_tree):
     """Test correct balance."""
-    assert bigger_binary_tree.balance() == 3
+    assert bigger_binary_tree.balance() == 1
     assert binary_tree.balance() == 0
 
 
@@ -198,4 +198,4 @@ def test_balance_right(binary_tree):
     binary_tree.insert(2)
     binary_tree.insert(13)
     binary_tree.insert(9)
-    assert binary_tree.balance() == -3
+    assert binary_tree.balance() == -2
