@@ -184,4 +184,15 @@ class BinTree(object):
 
 
 if __name__ == '__main__':
-    pass
+    import timeit
+    setup = '''
+from bst import BinTree
+binary_search = BinTree([5, -1, 1, 8, 9, 10, 17, -3, -10, 4, 2, -100, 7, -5, 0, 16, -22, 14, 3, 11])
+binary_search.search({})
+'''
+    pre_bst = [5, -1, 1, 8, 9, 10, 17, -3, -10, 4, 2, -100, 7, -5, 0, 16, -22, 14, 3, 11]
+
+    for node in pre_bst:
+        new_setup = setup.format(node)
+        time = timeit.timeit(new_setup, number=10)
+        print(node, time)
