@@ -191,8 +191,21 @@ binary_search = BinTree([5, -1, 1, 8, 9, 10, 17, -3, -10, 4, 2, -100, 7, -5, 0, 
 binary_search.search({})
 '''
     pre_bst = [5, -1, 1, 8, 9, 10, 17, -3, -10, 4, 2, -100, 7, -5, 0, 16, -22, 14, 3, 11]
+    search_num = input('''
+The following values are contained in a binary search tree:
 
-    for node in pre_bst:
-        new_setup = setup.format(node)
-        time = timeit.timeit(new_setup, number=10)
-        print(node, time)
+[5, -1, 1, 8, 9, 10, 17, -3, -10, 4, 2, -100, 7, -5, 0, 16, -22, 14, 3, 11]
+
+Enter a number to check the performance of the search function.
+>>> ''')
+    while isinstance(search_num, str):
+        try:
+            search_num = int(search_num)
+        except ValueError:
+            search_num = input("Integer, please.")
+    new_setup = setup.format(search_num)
+    times = timeit.repeat(new_setup, number=100, repeat=10)
+    print('''
+Searched binary search tree for the number {} function 100 times, repeated 10 times.
+Best: {}s
+Worst: {}s'''.format(search_num, min(times), max(times)))
