@@ -299,3 +299,75 @@ def test_breadth_first_small():
     beast = BinTree([10, 5, 11, 13, 4, 6, 12, 20, 21, 7])
     generator = beast.breadth_first()
     assert list(generator) == [10, 5, 11, 4, 6, 13, 7, 12, 20, 21]
+
+
+# ===== Delete =====
+
+
+def test_delete_returns_none(empty_bst):
+    """Ensure that delete returns None."""
+    assert empty_bst.delete(1000) is None
+    assert empty_bst.size() == 0
+
+
+def test_delete_root(empty_bst):
+    """Ensure delete can work on the root."""
+    empty_bst.insert(5)
+    empty_bst.insert(10)
+    assert empty_bst.contains(5) is True
+    assert empty_bst.size() == 2
+    empty_bst.delete(5)
+    assert empty_bst.contains(5) is False
+    assert empty_bst.contains(10) is True
+    assert empty_bst._root.val == 10
+    assert empty_bst.size() == 1
+
+
+def test_delete_no_children():
+    """Delete works on a node with no children."""
+    from bst import BinTree
+    beast = BinTree([45, 33, 1, 8, 93, 10, 63, 44, 100, 4, 79, 69, 7, 54, 0, 16, 94, 14, 49, 11])
+    assert beast.size() == 20
+    beast.delete(11)
+    assert beast.size() == 19
+    assert not beast.contains(11)
+    assert beast.search(14).left is None
+
+
+def test_delete_one_child():
+    """Delete works on a node with one child."""
+    from bst import BinTree
+    beast = BinTree([45, 33, 1, 8, 93, 10, 63, 44, 100, 4, 79, 69, 7, 54, 0, 16, 94, 14, 49, 11])
+    assert beast.size() == 20
+    beast.delete(16)
+    assert beast.size() == 19
+    assert not beast.contains(16)
+    assert beast.search(10).right.val == 14
+
+
+def test_delete_two_children():
+    """Delete works on a node with one child."""
+    from bst import BinTree
+    beast = BinTree([45, 33, 1, 8, 93, 10, 63, 44, 100, 4, 79, 69, 7, 54, 0, 16, 94, 14, 49, 11])
+    assert beast.size() == 20
+    beast.delete(93)
+    assert beast.size() == 19
+    assert not beast.contains(93)
+    assert beast._root.right.val == 79
+    assert beast.search(63).right.val == 69
+    assert beast.search(79).right.val == 100
+
+
+def test_delete_complex_root():
+    """Delete works on a node with one child."""
+    from bst import BinTree
+    beast = BinTree([45, 33, 1, 8, 93, 10, 63, 44, 100, 4, 79, 69, 7, 54, 0, 16, 94, 14, 49, 11])
+    assert beast.size() == 20
+    beast.delete(45)
+    assert beast.size() == 19
+    assert not beast.contains(45)
+    assert beast._root.val == 44
+    assert beast._root.right.val == 93
+    assert beast._root.left.val == 33
+    generator = beast.in_order()
+    assert list(generator) == [0, 1, 4, 7, 8, 10, 11, 14, 16, 33, 44, 49, 54, 63, 69, 79, 93, 94, 100]

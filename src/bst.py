@@ -4,11 +4,12 @@
 class Node(object):
     """Implement a node of a BST."""
 
-    def __init__(self, val, left=None, right=None):
+    def __init__(self, val, left=None, right=None, parent=None):
         """Instantiate a new BST."""
         self.val = val
         self.left = left
         self.right = right
+        self.parent = parent
 
 
 class BinTree(object):
@@ -22,7 +23,7 @@ class BinTree(object):
             for item in val:
                 self.insert(item)
         elif val:
-            raise ValueError('BST only accepts optional parameter or a list or tuple')
+            raise ValueError('BST only accepts optional parameter of a list or tuple')
 
     def insert(self, val):
         """Insert a value into a BST."""
@@ -39,7 +40,7 @@ class BinTree(object):
                         curr = curr.right
                         continue
                     else:
-                        curr.right = Node(val)
+                        curr.right = Node(val, parent=curr)
                         self._size += 1
                         return
                 elif val < curr.val:
@@ -47,7 +48,7 @@ class BinTree(object):
                         curr = curr.left
                         continue
                     else:
-                        curr.left = Node(val)
+                        curr.left = Node(val, parent=curr)
                         self._size += 1
                         return
                 else:
@@ -122,6 +123,43 @@ class BinTree(object):
         if start.right:
             r_depth = self.depth(start.right)
         return l_depth - r_depth
+
+    def delete(self, val):
+        """Delete a given value from the tree and re-order it."""
+        start = self.search(val)
+        if start:
+            is_root = True if start is self._root else False
+
+            if not start.left and not start.right:  # if no children
+                if is_root:
+                    self._root = None
+                else:
+                    if start.parent.val > start.val:
+                        start.parent.left = None
+                    else:
+                        start.parent.right = None
+            elif start.left and start.right:  # two children
+                small = start.left
+                while small.right:
+                    small = small.right
+                start.val = small.val
+                small.parent.right = small.left
+                if small.left:
+                    small.left.parent = small.parent
+            elif start.left:
+                start.val = start.left.val
+                tmp_r = start.left.right
+                tmp_l = start.left.left
+                start.right = tmp_r
+                start.left = tmp_l
+            elif start.right:
+                start.val = start.right.val
+                tmp_r = start.right.right
+                tmp_l = start.right.left
+                start.right = tmp_r
+                start.left = tmp_l
+            self._size -= 1
+        return None
 
     def in_order(self, node=None):
         """Traverse the list in order."""
