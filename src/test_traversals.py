@@ -251,3 +251,51 @@ def test_breadth_yields_root_if_no_left_and_right(empty_bst):
     empty_bst.insert(5)
     generator = empty_bst.breadth_first()
     assert next(generator) == 5
+
+
+def test_breadth_first_yields_left_nodes(empty_bst):
+    """."""
+    empty_bst.insert(5)
+    empty_bst.insert(4)
+    empty_bst.insert(3)
+    empty_bst.insert(2)
+    empty_bst.insert(1)
+    empty_bst.insert(0)
+    generator = empty_bst.breadth_first()
+    assert list(generator) == [5, 4, 3, 2, 1, 0]
+
+
+def test_breadth_first_yields_right_nodes(empty_bst):
+    """."""
+    empty_bst.insert(5)
+    empty_bst.insert(6)
+    empty_bst.insert(7)
+    empty_bst.insert(8)
+    empty_bst.insert(9)
+    empty_bst.insert(10)
+    generator = empty_bst.breadth_first()
+    assert list(generator) == [5, 6, 7, 8, 9, 10]
+
+
+def test_breadth_firwt_v_shaped_bst():
+    """Test odd shape."""
+    from bst import BinTree
+    beast = BinTree([5, 4, 3, 2, 1, 6, 7, 8, 9, 10])
+    generator = beast.breadth_first()
+    assert list(generator) == [5, 4, 6, 3, 7, 2, 8, 1, 9, 10]
+
+
+def test_breadth_first_big():
+    """."""
+    from bst import BinTree
+    beast = BinTree([45, 33, 1, 8, 93, 10, 63, 44, 100, 4, 79, 69, 7, 54, 0, 16, 94, 14, 49, 11])
+    generator = beast.breadth_first()
+    assert list(generator) == [45, 33, 93, 1, 44, 63, 100, 0, 8, 54, 79, 94, 4, 10, 49, 69, 7, 16, 14, 11]
+
+
+def test_breadth_first_small():
+    """."""
+    from bst import BinTree
+    beast = BinTree([10, 5, 11, 13, 4, 6, 12, 20, 21, 7])
+    generator = beast.breadth_first()
+    assert list(generator) == [10, 5, 11, 4, 6, 13, 7, 12, 20, 21]
