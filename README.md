@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/kurtrm/data_structs.svg?branch=bst)](https://travis-ci.org/kurtrm/data_structs)
+[![Build Status](https://travis-ci.org/kurtrm/data_structs.svg?branch=balancing-bst)](https://travis-ci.org/kurtrm/data_structs)
 
 More Data Structures for Python 401
 
