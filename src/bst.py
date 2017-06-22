@@ -173,18 +173,60 @@ class BinTree(object):
         while start:
             direction = self.balance(start)
             if direction < -1:
-                start = self.rotate_right(start)
+                if start.left.right and not start.left.left:
+                    start = self.rotate_rightleft(start)
+                else:
+                    start = self.rotate_right(start)
             elif direction > 1:
-                start = self.rotate_left(start)
+                if start.right.left and not start.right.right:
+                    start = self.rotate_leftright(start)
+                else:
+                    start = self.rotate_left(start)
         return None
 
     def rotate_left(self, start):
         """Rotate the tree extending from the start to the left."""
-        pass
+        rotate_to = start.right
+        rotate_to.parent = start.parent
+        start.parent = rotate_to
+        start.right = rotate_to.left
+        if rotate_to.left:
+            rotate_to.left.parent = start
+        rotate_to.left = start
+        start = start.parent
+        return start
+
+    def rotate_leftright(self, start):
+        """Rotate the tree extending from the start to the left-right."""
+        rotate_to = start.right.left
+        rotate_to.right = rotate_to.parent
+        rotate_to.parent = start.parent
+        start.parent = rotate_to
+        rotate_to.left = start
+        start = start.parent
+        return start
 
     def rotate_right(self, start):
         """Rotate the tree extending from the start to the right."""
-        pass
+        rotate_to = start.left
+        rotate_to.parent = start.parent
+        start.parent = rotate_to
+        start.left = rotate_to.right
+        if rotate_to.right:
+            rotate_to.right.parent = start
+        rotate_to.right = start
+        start = start.parent
+        return start
+
+    def rotate_rightleft(self, start):
+        """Rotate the tree extending from the start to the right-left."""
+        rotate_to = start.left.right
+        rotate_to.left = rotate_to.parent
+        rotate_to.parent = start.parent
+        start.parent = rotate_to
+        rotate_to.right = start
+        start = start.parent
+        return start
 
     def in_order(self, node=None):
         """Traverse the list in order."""
