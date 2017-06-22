@@ -36,16 +36,10 @@ def small_bst():
 
 # Also, exploring post and pre order test failures
 
-def test_in_order_only_accepts_number(small_bst):
+def test_in_order_only_accepts_node(small_bst):
     """Ensure each test only accepts an integer or float."""
     with pytest.raises(TypeError):
-        small_bst.in_order('stringy')
-
-
-def test_in_order_node_must_be_in_binary_tree_to_start_traversal(binary_tree):
-    """Ensure a node not in the tree can't be passed into the method."""
-    with pytest.raises(ValueError):
-        binary_tree.in_order(1000)
+        next(small_bst.in_order('stringy'))
 
 
 def test_in_order_yields_none_if_empty(empty_bst):
@@ -106,37 +100,13 @@ def test_small(small_bst):
     assert list(generator) == sorted([10, 5, 11, 13, 2, 0, 20, 7, 12])
 
 
-# ===== Parameters reserved for recursion. Trying to pass an argument
-# results in an error =====
-
-
-# def test_big_with_argument(binary_tree):
-#     """."""
-#     generator = binary_tree.in_order(1)
-#     assert list(generator) == [0, 1, 2, 3, 4]
-
-
-# def test_small_with_argument(small_bst):
-#     """."""
-#     small_bst.insert(7)
-#     small_bst.insert(12)
-#     generator = small_bst.in_order(5)
-#     assert list(generator) == [0, 2, 5, 7]
-
-
 # ===== Pre-Order Traversal =====
 
 
-def test_pre_order_only_accepts_number(small_bst):
+def test_pre_order_only_accepts_node(small_bst):
     """Ensure each test only accepts an integer or float."""
     with pytest.raises(TypeError):
-        small_bst.pre_order('stringy')
-
-
-def test_pre_order_node_must_be_in_binary_tree_to_start_traversal(binary_tree):
-    """Ensure a node not in the tree can't be passed into the method."""
-    with pytest.raises(ValueError):
-        binary_tree.pre_order(1000)
+        next(small_bst.pre_order('stringy'))
 
 
 def test_pre_order_yields_none_if_empty(empty_bst):
@@ -180,7 +150,7 @@ def test_pre_order_v_shaped_bst():
     from bst import BinTree
     beast = BinTree([5, 4, 3, 2, 1, 6, 7, 8, 9, 10])
     generator = beast.pre_order()
-    assert list(generator) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    assert list(generator) == [5, 4, 3, 2, 1, 6, 7, 8, 9, 10]
 
 
 def test_pre_order_big():
@@ -202,16 +172,10 @@ def test_pre_order_small():
 # ===== Post-Order Traversal =====
 
 
-def test_post_order_only_accepts_number(small_bst):
+def test_post_order_only_accepts_node(small_bst):
     """Ensure each test only accepts an integer or float."""
     with pytest.raises(TypeError):
-        small_bst.post_order('stringy')
-
-
-def test_post_order_node_must_be_in_binary_tree_to_start_traversal(binary_tree):
-    """Ensure a node not in the tree can't be passed into the method."""
-    with pytest.raises(ValueError):
-        binary_tree.post_order(1000)
+        next(small_bst.post_order('stringy'))
 
 
 def test_post_order_yields_none_if_empty(empty_bst):
@@ -272,7 +236,6 @@ def test_post_order_small():
     beast = BinTree([10, 5, 11, 13, 4, 6, 12, 20, 21, 7])
     generator = beast.post_order()
     assert list(generator) == [4, 7, 6, 5, 12, 21, 20, 13, 11, 10]
-
 
 
 # ===== Breadth-First Traversal =====

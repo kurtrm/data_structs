@@ -125,6 +125,8 @@ class BinTree(object):
 
     def in_order(self, node=None):
         """Traverse the list in order."""
+        if node and not isinstance(node, Node):
+            raise TypeError('Traversal only accepts None or a Node as params')
         if not node:
             node = self._root
             if not node:
@@ -139,29 +141,33 @@ class BinTree(object):
 
     def pre_order(self, node=None):
         """Traverse the list in pre-order."""
+        if node and not isinstance(node, Node):
+            raise TypeError('Traversal only accepts None or a Node as params')
         if not node:
             node = self._root
             if not node:
                 yield None
         yield node.val
         if node.left:
-            for each_val in self.in_order(node.left):
+            for each_val in self.pre_order(node.left):
                 yield each_val
         if node.right:
-            for each_val in self.in_order(node.right):
+            for each_val in self.pre_order(node.right):
                 yield each_val
 
     def post_order(self, node=None):
         """Traverse the list in post-order."""
+        if node and not isinstance(node, Node):
+            raise TypeError('Traversal only accepts None or a Node as params')
         if not node:
             node = self._root
             if not node:
                 yield None
         if node.left:
-            for each_val in self.in_order(node.left):
+            for each_val in self.post_order(node.left):
                 yield each_val
         if node.right:
-            for each_val in self.in_order(node.right):
+            for each_val in self.post_order(node.right):
                 yield each_val
         yield node.val
 
@@ -175,15 +181,17 @@ class BinTree(object):
             traverse.append(self._root.left)
         if self._root.right:
             traverse.append(self._root.right)
-        for node in traverse:
-            yield node.val
-            if node.left:
-                traverse.append(node.left)
-            if node.right:
-                traverse.append(node.right)
+        while traverse:
+            curr = traverse[0]
+            yield curr.val
+            if curr.left:
+                traverse.append(curr.left)
+            if curr.right:
+                traverse.append(curr.right)
+            traverse.remove(curr)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     import timeit
     setup = '''
 from bst import BinTree
