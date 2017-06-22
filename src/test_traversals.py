@@ -53,12 +53,6 @@ def test_in_order_yields_none_if_empty(empty_bst):
     assert next(empty_bst.in_order()) is None
 
 
-def test_starts_at_root_with_no_arguments(binary_tree):
-    """Ensure starts at root."""
-    generator = binary_tree.in_order()
-    assert next(generator) == binary_tree._root.val
-
-
 def test_yields_root_if_no_left_and_right(empty_bst):
     """."""
     empty_bst.insert(5)
@@ -106,8 +100,28 @@ def test_big(binary_tree):
 
 def test_small(small_bst):
     """."""
+    small_bst.insert(7)
+    small_bst.insert(12)
     generator = small_bst.in_order()
-    assert list(generator) == sorted([10, 5, 11, 13, 2, 0, 20])
+    assert list(generator) == sorted([10, 5, 11, 13, 2, 0, 20, 7, 12])
+
+
+# ===== Parameters reserved for recursion. Trying to pass an argument
+# results in an error =====
+
+
+# def test_big_with_argument(binary_tree):
+#     """."""
+#     generator = binary_tree.in_order(1)
+#     assert list(generator) == [0, 1, 2, 3, 4]
+
+
+# def test_small_with_argument(small_bst):
+#     """."""
+#     small_bst.insert(7)
+#     small_bst.insert(12)
+#     generator = small_bst.in_order(5)
+#     assert list(generator) == [0, 2, 5, 7]
 
 
 # ===== Pre-Order Traversal =====
@@ -128,12 +142,6 @@ def test_pre_order_node_must_be_in_binary_tree_to_start_traversal(binary_tree):
 def test_pre_order_yields_none_if_empty(empty_bst):
     """Ensure we get None if empty."""
     assert next(empty_bst.pre_order()) is None
-
-
-def test_pre_order_starts_at_root_with_no_arguments(binary_tree):
-    """starts at root."""
-    generator = binary_tree.pre_order()
-    assert next(generator) == binary_tree._root.val
 
 
 def test_pre_order_yields_root_if_no_left_and_right(empty_bst):
@@ -209,12 +217,6 @@ def test_post_order_node_must_be_in_binary_tree_to_start_traversal(binary_tree):
 def test_post_order_yields_none_if_empty(empty_bst):
     """Ensure we get None if empty."""
     assert next(empty_bst.post_order()) is None
-
-
-def test_post_order_starts_at_root_with_no_arguments(binary_tree):
-    """Ensure starts at root."""
-    generator = binary_tree.post_order()
-    assert next(generator) == binary_tree._root.val
 
 
 def test_post_order_yields_root_if_no_left_and_right(empty_bst):
