@@ -42,6 +42,7 @@ class BinTree(object):
                     else:
                         curr.right = Node(val, parent=curr)
                         self._size += 1
+                        self.rebalance(curr)
                         return
                 elif val < curr.val:
                     if curr.left:
@@ -50,6 +51,7 @@ class BinTree(object):
                     else:
                         curr.left = Node(val, parent=curr)
                         self._size += 1
+                        self.rebalance(curr)
                         return
                 else:
                     return
@@ -110,11 +112,12 @@ class BinTree(object):
         elif l_depth < r_depth:
             return r_depth + 1
 
-    def balance(self):
+    def balance(self, start=None):
         """Return an integer representing if the tree is balanced or not."""
-        start = self._root
-        if not start:
+        if self._root is None:
             return 0
+        if not start:
+            start = self._root
 
         l_depth = 0
         r_depth = 0
@@ -138,6 +141,7 @@ class BinTree(object):
                         start.parent.left = None
                     else:
                         start.parent.right = None
+                    self.rebalance(start.parent)
             elif start.left and start.right:  # two children
                 small = start.left
                 while small.right:
@@ -146,20 +150,41 @@ class BinTree(object):
                 small.parent.right = small.left
                 if small.left:
                     small.left.parent = small.parent
+                self.rebalance(small.parent)
             elif start.left:
                 start.val = start.left.val
                 tmp_r = start.left.right
                 tmp_l = start.left.left
                 start.right = tmp_r
                 start.left = tmp_l
+                self.rebalance(start.parent)
             elif start.right:
                 start.val = start.right.val
                 tmp_r = start.right.right
                 tmp_l = start.right.left
                 start.right = tmp_r
                 start.left = tmp_l
+                self.rebalance(start.parent)
             self._size -= 1
         return None
+
+    def rebalance(self, start):
+        """Rebalance the BST every time it is modified."""
+        while start:
+            direction = self.balance(start)
+            if direction < -1:
+                start = self.rotate_right(start)
+            elif direction > 1:
+                start = self.rotate_left(start)
+        return None
+
+    def rotate_left(self, start):
+        """Rotate the tree extending from the start to the left."""
+        pass
+
+    def rotate_right(self, start):
+        """Rotate the tree extending from the start to the right."""
+        pass
 
     def in_order(self, node=None):
         """Traverse the list in order."""
