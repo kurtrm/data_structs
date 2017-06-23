@@ -38,7 +38,7 @@ def test_intiate_small():
     """."""
     from bst import BinTree
     beast = BinTree([10, 9, 8, 7, 6])
-    assert beast.balance() == -1
+    assert beast.balance() == 1
     assert beast._root.left.val == 7
     assert beast.balance(beast._root.left) == 0
 

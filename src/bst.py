@@ -218,10 +218,10 @@ class BinTree(object):
         if start is self._root:
             self._root = rotate_to
         rotate_to.parent = start.parent
+        if start.parent:
+            start.parent.left = rotate_to
         start.parent = rotate_to
         start.left = rotate_to.right
-        if rotate_to.right:
-            rotate_to.right.parent = start
         rotate_to.right = start
         start = start.parent
         return start
