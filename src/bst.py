@@ -172,21 +172,25 @@ class BinTree(object):
         """Rebalance the BST every time it is modified."""
         while start:
             direction = self.balance(start)
-            if direction < -1:
+            if direction > 1:
                 if start.left.right and not start.left.left:
                     start = self.rotate_rightleft(start)
                 else:
                     start = self.rotate_right(start)
-            elif direction > 1:
+            elif direction < -1:
                 if start.right.left and not start.right.right:
                     start = self.rotate_leftright(start)
                 else:
                     start = self.rotate_left(start)
+            else:
+                start = start.parent
         return None
 
     def rotate_left(self, start):
         """Rotate the tree extending from the start to the left."""
         rotate_to = start.right
+        if start is self._root:
+            self._root = rotate_to
         rotate_to.parent = start.parent
         start.parent = rotate_to
         start.right = rotate_to.left
@@ -199,6 +203,8 @@ class BinTree(object):
     def rotate_leftright(self, start):
         """Rotate the tree extending from the start to the left-right."""
         rotate_to = start.right.left
+        if start is self._root:
+            self._root = rotate_to
         rotate_to.right = rotate_to.parent
         rotate_to.parent = start.parent
         start.parent = rotate_to
@@ -209,6 +215,8 @@ class BinTree(object):
     def rotate_right(self, start):
         """Rotate the tree extending from the start to the right."""
         rotate_to = start.left
+        if start is self._root:
+            self._root = rotate_to
         rotate_to.parent = start.parent
         start.parent = rotate_to
         start.left = rotate_to.right
@@ -221,6 +229,8 @@ class BinTree(object):
     def rotate_rightleft(self, start):
         """Rotate the tree extending from the start to the right-left."""
         rotate_to = start.left.right
+        if start is self._root:
+            self._root = rotate_to
         rotate_to.left = rotate_to.parent
         rotate_to.parent = start.parent
         start.parent = rotate_to
