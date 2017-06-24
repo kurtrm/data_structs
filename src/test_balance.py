@@ -75,7 +75,7 @@ def test_insert_many_into_empty_right(empty_bst):
 #     """."""
 #     empty_bst.insert(5)
 #     empty_bst.insert(4)
-#     assert empty_bst.balance() == -1
+#     assert empty_bst.balance() == 1
 #     empty_bst.insert(3)
 #     assert empty_bst.balance() == 0
 #     assert empty_bst._root.val == 4
@@ -85,7 +85,7 @@ def test_insert_many_into_empty_right(empty_bst):
 #     """Ensure stays balanced when we expect it to."""
 #     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 0
 #     smaller_binary_tree.insert(3)
-#     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == -1
+#     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 1
 #     assert smaller_binary_tree.balance() == 0
 #     smaller_binary_tree.insert(9)
 #     assert smaller_binary_tree.balance() == 0
@@ -117,7 +117,7 @@ def test_insert_many_into_empty_right(empty_bst):
 #     assert smaller_binary_tree.balance() == 0
 #     assert smaller_binary_tree._root.val == 70
 #     assert smaller_binary_tree._root.left.val == 10
-#     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 1
+#     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == -1
 #     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.right) == 0
 #     assert smaller_binary_tree._root.left.right.val == 10
 #     assert smaller_binary_tree._root.right == 92
@@ -125,14 +125,14 @@ def test_insert_many_into_empty_right(empty_bst):
 
 # def test_insert_into_balanced_large(large_binary_tree):
 #     """Ensure stays balanced when we expect a larger to to stay balnced."""
-#     assert large_binary_tree.balance(large_binary_tree._root.left.left) == 1
+#     assert large_binary_tree.balance(large_binary_tree._root.left.left) == -1
 #     large_binary_tree.insert(27)
 #     large_binary_tree.insert(9)
 #     large_binary_tree.insert(15)
 #     assert large_binary_tree.balance() == 0
-#     assert large_binary_tree.balance(large_binary_tree._root.left) == 1
+#     assert large_binary_tree.balance(large_binary_tree._root.left) == -1
 #     large_binary_tree._root.left.right.left.val == 14
-#     large_binary_tree.balance(large_binary_tree._root.left.right.right) == 1
+#     large_binary_tree.balance(large_binary_tree._root.left.right.right) == -1
 
 
 # def test_insert_larger_many_and_force_rebalance(large_binary_tree):
@@ -149,7 +149,7 @@ def test_insert_many_into_empty_right(empty_bst):
 # def test_delete_from_small_stay_balanced(smaller_binary_tree):
 #     """."""
 #     smaller_binary_tree.delete(7)
-#     assert smaller_binary_tree.balance() == 1
+#     assert smaller_binary_tree.balance() == -1
 #     smaller_binary_tree.delete(13)
 #     smaller_binary_tree.delete(21)
 #     assert smaller_binary_tree.balance() == 0
@@ -175,7 +175,7 @@ def test_insert_many_into_empty_right(empty_bst):
 #     large_binary_tree.delete(99)
 #     large_binary_tree.delete(44)
 #     large_binary_tree.delete(63)
-#     assert large_binary_tree.balance() == -1
+#     assert large_binary_tree.balance() == 1
 
 
 # def test_delete_from_large_rebalance(large_binary_tree):
@@ -185,5 +185,5 @@ def test_insert_many_into_empty_right(empty_bst):
 #     large_binary_tree.delete(14)
 #     large_binary_tree.delete(25)
 #     assert large_binary_tree._root.val == 63
-#     assert large_binary_tree.balance() == -1
-#     assert large_binary_tree.balance(large_binary_tree._root.left.right) == 1
+#     assert large_binary_tree.balance() == 1
+#     assert large_binary_tree.balance(large_binary_tree._root.left.right) == -1
