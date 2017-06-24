@@ -189,6 +189,8 @@ class BinTree(object):
     def rotate_left(self, start):
         """Rotate the tree extending from the start to the left."""
         rotate_to = start.right
+        if start is not self._root:
+            start.parent.right = start.right
         if start is self._root:
             self._root = rotate_to
         rotate_to.parent = start.parent

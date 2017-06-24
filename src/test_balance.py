@@ -49,7 +49,7 @@ def test_initiate_big():
     beast = BinTree([1, 2, 3, 4, 5, 6])
     assert beast.balance() == 0
     assert beast._root.val == 4
-    assert beast.balance(beast._root.right) == 1
+    assert beast.balance(beast._root.right) == -1
     assert beast._root.left.val == 2
     assert beast.balance(beast._root.left) == 0
 
@@ -65,30 +65,30 @@ def test_insert_many_into_empty_right(empty_bst):
     """."""
     empty_bst.insert(5)
     empty_bst.insert(6)
-    assert empty_bst.balance() == 1
+    assert empty_bst.balance() == -1
     empty_bst.insert(7)
     assert empty_bst.balance() == 0
     assert empty_bst._root.val == 6
 
 
-# def test_insert_many_into_empty_left(empty_bst):
-#     """."""
-#     empty_bst.insert(5)
-#     empty_bst.insert(4)
-#     assert empty_bst.balance() == 1
-#     empty_bst.insert(3)
-#     assert empty_bst.balance() == 0
-#     assert empty_bst._root.val == 4
+def test_insert_many_into_empty_left(empty_bst):
+    """."""
+    empty_bst.insert(5)
+    empty_bst.insert(4)
+    assert empty_bst.balance() == 1
+    empty_bst.insert(3)
+    assert empty_bst.balance() == 0
+    assert empty_bst._root.val == 4
 
 
-# def test_insert_into_balanced_small(smaller_binary_tree):
-#     """Ensure stays balanced when we expect it to."""
-#     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 0
-#     smaller_binary_tree.insert(3)
-#     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 1
-#     assert smaller_binary_tree.balance() == 0
-#     smaller_binary_tree.insert(9)
-#     assert smaller_binary_tree.balance() == 0
+def test_insert_into_balanced_small(smaller_binary_tree):
+    """Ensure stays balanced when we expect it to."""
+    assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 0
+    smaller_binary_tree.insert(3)
+    assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 1
+    assert smaller_binary_tree.balance() == 0
+    smaller_binary_tree.insert(9)
+    assert smaller_binary_tree.balance() == 0
 
 
 # def test_insert_small_many_and_force_rebalance(smaller_binary_tree):
