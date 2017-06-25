@@ -7,8 +7,9 @@ install:
   - pip install --upgrade pip
   - pip install .
   - pip install -r requirements.txt
+  - pip install coveralls
 # command to run tests
 script: 
-  - py.test src --cov-report term-missing
+  - py.test src --cov=src
 after_success:
   - coveralls
