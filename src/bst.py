@@ -194,7 +194,10 @@ class BinTree(object):
             self._root = rotate_to
         rotate_to.parent = start.parent
         if start.parent:
-            start.parent.right = rotate_to
+            if start.parent.val < rotate_to.val:
+                start.parent.right = rotate_to
+            elif start.parent.val > rotate_to.val:
+                start.parent.left = rotate_to
         start.parent = rotate_to
         start.right = rotate_to.left
         if rotate_to.left:
@@ -212,6 +215,11 @@ class BinTree(object):
         temp_left = start.right.left.left
         rotate_to.right = rotate_to.parent
         rotate_to.parent = start.parent
+        if start.parent:
+            if start.parent.val < rotate_to.val:
+                start.parent.right = rotate_to
+            elif start.parent.val > rotate_to.val:
+                start.parent.left = rotate_to
         start.parent = rotate_to
         rotate_to.left = start
         if rotate_to is not self._root:
@@ -230,7 +238,10 @@ class BinTree(object):
             self._root = rotate_to
         rotate_to.parent = start.parent
         if start.parent:
-            start.parent.left = rotate_to
+            if start.parent.val < rotate_to.val:
+                start.parent.right = rotate_to
+            elif start.parent.val > rotate_to.val:
+                start.parent.left = rotate_to
         start.parent = rotate_to
         start.left = rotate_to.right
         if rotate_to.right:
@@ -248,6 +259,11 @@ class BinTree(object):
         temp_right = start.left.right.right
         rotate_to.left = rotate_to.parent
         rotate_to.parent = start.parent
+        if start.parent:
+            if start.parent.val < rotate_to.val:
+                start.parent.right = rotate_to
+            elif start.parent.val > rotate_to.val:
+                start.parent.left = rotate_to
         start.parent = rotate_to
         rotate_to.right = start
         rotate_to.right = start
