@@ -81,6 +81,26 @@
 #     assert empty_bst._root.val == 4
 
 
+# def test_insert_into_balanced_small(smaller_binary_tree):
+#     """Ensure stays balanced when we expect it to."""
+#     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 0
+#     smaller_binary_tree.insert(3)
+#     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 1
+#     assert smaller_binary_tree.balance() == 0
+#     smaller_binary_tree.insert(9)
+#     assert smaller_binary_tree.balance() == 0
+
+
+# def test_insert_small_many_and_force_rebalance(smaller_binary_tree):
+#     """Ensure it rebalances correctly with a few nodes."""
+#     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 0
+#     smaller_binary_tree.insert(3)
+#     smaller_binary_tree.insert(2)
+#     smaller_binary_tree.insert(1)
+#     assert smaller_binary_tree.balance() == 1
+#     assert smaller_binary_tree._root.left.left.val == 3
+
+
 import pytest
 
 
@@ -90,26 +110,6 @@ def smaller_binary_tree():
     from bst import BinTree
     beast = BinTree([10, 5, 11, 13, 4, 6, 12, 20, 21, 7])
     return beast
-
-
-def test_insert_into_balanced_small(smaller_binary_tree):
-    """Ensure stays balanced when we expect it to."""
-    assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 0
-    smaller_binary_tree.insert(3)
-    assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 1
-    assert smaller_binary_tree.balance() == 0
-    smaller_binary_tree.insert(9)
-    assert smaller_binary_tree.balance() == 0
-
-
-def test_insert_small_many_and_force_rebalance(smaller_binary_tree):
-    """Ensure it rebalances correctly with a few nodes."""
-    assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 0
-    smaller_binary_tree.insert(3)
-    smaller_binary_tree.insert(2)
-    smaller_binary_tree.insert(1)
-    assert smaller_binary_tree.balance() == 1
-    assert smaller_binary_tree._root.left.left.val == 3
 
 
 def test_insert_small_many_and_force_rebalance_hard_right(smaller_binary_tree):

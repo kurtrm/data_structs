@@ -209,15 +209,17 @@ class BinTree(object):
         if start is self._root:
             self._root = rotate_to
         temp_right = start.right.left.right
+        temp_left = start.right.left.left
         rotate_to.right = rotate_to.parent
         rotate_to.parent = start.parent
         start.parent = rotate_to
         rotate_to.left = start
-        rotate_to.parent.right = rotate_to
+        if rotate_to is not self._root:
+            rotate_to.parent.right = rotate_to
         rotate_to.right.parent = rotate_to
-        rotate_to.left.right = None
+        rotate_to.left.right = temp_left
         rotate_to.right.left = temp_right
-        #  ^^^^^ THIS MIGHT COME TO BUT US LATER
+        #  ^^^^^ THIS MIGHT COME TO BITE US LATER
         start = start.parent
         return start
 
@@ -242,6 +244,8 @@ class BinTree(object):
         rotate_to = start.left.right
         if start is self._root:
             self._root = rotate_to
+        temp_left = start.left.right.left
+        temp_right = start.left.right.right
         rotate_to.left = rotate_to.parent
         rotate_to.parent = start.parent
         start.parent = rotate_to
@@ -249,8 +253,8 @@ class BinTree(object):
         rotate_to.right = start
         rotate_to.parent.left = rotate_to
         rotate_to.left.parent = rotate_to
-        rotate_to.right.left = None
-        rotate_to.left.right = None
+        rotate_to.right.left = temp_left
+        rotate_to.left.right = temp_right
         start = start.parent
         return start
 
