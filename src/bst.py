@@ -181,6 +181,9 @@ class BinTree(object):
             elif direction < -1:
                 if start.right.left and not start.right.right:
                     start = self.rotate_leftright(start)
+                elif start.right.left and start is self._root:
+                    # import pdb; pdb.set_trace()
+                    start = self.rotate_leftright(start)
                 else:
                     start = self.rotate_left(start)
             else:
@@ -205,6 +208,7 @@ class BinTree(object):
 
     def rotate_leftright(self, start):
         """Rotate the tree extending from the start to the left-right."""
+        # import pdb; pdb.set_trace()
         rotate_to = start.right.left
         if start is self._root:
             self._root = rotate_to
