@@ -8,8 +8,10 @@ install:
   - pip install .
   - pip install -r requirements.txt
   - pip install coveralls
+  - pip install python-coveralls
 # command to run tests
 script: 
   - py.test src --cov=src
 after_success:
   - coveralls
+repo_token: Brs5xrIMmUZN4vkiqDPhOdSMaq6KJAtMs
