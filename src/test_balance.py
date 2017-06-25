@@ -127,12 +127,12 @@ def test_insert_small_many_and_force_rebalance_hard_right(smaller_binary_tree):
     smaller_binary_tree.insert(95)
     smaller_binary_tree.insert(35)
     assert smaller_binary_tree.balance() == 0
-    assert smaller_binary_tree._root.val == 70
+    assert smaller_binary_tree._root.val == 20
     assert smaller_binary_tree._root.left.val == 10
     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == -1
     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.right) == 0
-    assert smaller_binary_tree._root.left.right.val == 10
-    assert smaller_binary_tree._root.right == 92
+    assert smaller_binary_tree._root.left.right.val == 12
+    assert smaller_binary_tree._root.right.val == 70
 
 
 # def test_insert_into_balanced_large(large_binary_tree):
