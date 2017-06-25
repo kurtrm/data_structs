@@ -42,7 +42,7 @@ class BinTree(object):
                     else:
                         curr.right = Node(val, parent=curr)
                         self._size += 1
-                        self.rebalance(curr)
+                        self.rebalance(curr, val)
                         return
                 elif val < curr.val:
                     # import pdb; pdb.set_trace()
@@ -52,7 +52,7 @@ class BinTree(object):
                     else:
                         curr.left = Node(val, parent=curr)
                         self._size += 1
-                        self.rebalance(curr)
+                        self.rebalance(curr, val)
                         return
                 else:
                     return
@@ -151,35 +151,35 @@ class BinTree(object):
                 small.parent.right = small.left
                 if small.left:
                     small.left.parent = small.parent
-                self.rebalance(small.parent)
+                self.rebalance(small.parent, val)
             elif start.left:
                 start.val = start.left.val
                 tmp_r = start.left.right
                 tmp_l = start.left.left
                 start.right = tmp_r
                 start.left = tmp_l
-                self.rebalance(start.parent)
+                self.rebalance(start.parent, val)
             elif start.right:
                 start.val = start.right.val
                 tmp_r = start.right.right
                 tmp_l = start.right.left
                 start.right = tmp_r
                 start.left = tmp_l
-                self.rebalance(start.parent)
+                self.rebalance(start.parent, val)
             self._size -= 1
         return None
 
-    def rebalance(self, start):
+    def rebalance(self, start, val):
         """Rebalance the BST every time it is modified."""
         while start:
             direction = self.balance(start)
             if direction > 1:
-                if start.left.right and not start.left.left:
+                if val < start.val and val > start.left.val:
                     start = self.rotate_rightleft(start)
                 else:
                     start = self.rotate_right(start)
             elif direction < -1:
-                if start.right.left and not start.right.right:
+                if val > start.val and val < start.right.val:
                     start = self.rotate_leftright(start)
                 elif start.right.left and start is self._root:
                     # import pdb; pdb.set_trace()
@@ -197,7 +197,10 @@ class BinTree(object):
             self._root = rotate_to
         rotate_to.parent = start.parent
         if start.parent:
-            start.parent.right = rotate_to
+            if start.parent.val < rotate_to.val:
+                start.parent.right = rotate_to
+            elif start.parent.val > rotate_to.val:
+                start.parent.left = rotate_to
         start.parent = rotate_to
         start.right = rotate_to.left
         if rotate_to.left:
@@ -216,6 +219,11 @@ class BinTree(object):
         temp_left = start.right.left.left
         rotate_to.right = rotate_to.parent
         rotate_to.parent = start.parent
+        if start.parent:
+            if start.parent.val < rotate_to.val:
+                start.parent.right = rotate_to
+            elif start.parent.val > rotate_to.val:
+                start.parent.left = rotate_to
         start.parent = rotate_to
         rotate_to.left = start
         if rotate_to is not self._root:
@@ -234,7 +242,10 @@ class BinTree(object):
             self._root = rotate_to
         rotate_to.parent = start.parent
         if start.parent:
-            start.parent.left = rotate_to
+            if start.parent.val < rotate_to.val:
+                start.parent.right = rotate_to
+            elif start.parent.val > rotate_to.val:
+                start.parent.left = rotate_to
         start.parent = rotate_to
         start.left = rotate_to.right
         if rotate_to.right:
@@ -252,6 +263,11 @@ class BinTree(object):
         temp_right = start.left.right.right
         rotate_to.left = rotate_to.parent
         rotate_to.parent = start.parent
+        if start.parent:
+            if start.parent.val < rotate_to.val:
+                start.parent.right = rotate_to
+            elif start.parent.val > rotate_to.val:
+                start.parent.left = rotate_to
         start.parent = rotate_to
         rotate_to.right = start
         rotate_to.right = start

@@ -101,17 +101,6 @@ def test_insert_small_many_and_force_rebalance(smaller_binary_tree):
     assert smaller_binary_tree._root.left.left.val == 3
 
 
-# import pytest
-
-
-# @pytest.fixture
-# def smaller_binary_tree():
-#     """For more testing."""
-#     from bst import BinTree
-#     beast = BinTree([10, 5, 11, 13, 4, 6, 12, 20, 21, 7])
-#     return beast
-
-
 def test_insert_small_many_and_force_rebalance_hard_right(smaller_binary_tree):
     """Ensure it rebalances correctly with a few nodes."""
     assert smaller_binary_tree.balance(smaller_binary_tree._root.left.left) == 0
