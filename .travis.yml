@@ -14,4 +14,3 @@ script:
   - py.test src/test_balance.py --cov=src/test_balance.py
 after_success:
   - coveralls
-repo_token: Brs5xrIMmUZN4vkiqDPhOdSMaq6KJAtMs

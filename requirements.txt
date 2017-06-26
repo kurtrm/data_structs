@@ -1,4 +1,2 @@
 py==1.4.32
-pytest==3.0.5
-pytest-cov
 python-coveralls
