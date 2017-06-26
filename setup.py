@@ -2,9 +2,9 @@
 from setuptools import setup
 
 
-# extra_packages = {
-#     'testing': ['pytest-watch', 'pytest-cov']
-# }
+extra_packages = {
+    'testing': ['pytest-watch', 'pytest-cov']
+}
 
 
 setup(
@@ -16,8 +16,8 @@ setup(
     license="MIT",
     py_modules=[],
     package_dir={'': 'src'},
-    install_requires=['ipython', 'pytest', 'pytest-cov'],
-    # extras_require=extra_packages,
+    install_requires=["ipython", "pytest"],
+    extras_require=extra_packages,
     entry_points={
         'console_scripts': [
         ]
