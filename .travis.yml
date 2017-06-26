@@ -5,7 +5,11 @@ python:
 # command to install dependencies
 install:
   - pip install --upgrade pip
+  - pip install .
+  - pip install .[testing]
   - pip install -r requirements.txt
+  - pip install coveralls
+  - pip install python-coveralls
 # command to run tests
 script: 
   - py.test src/test_balance.py --cov=src/test_balance.py
