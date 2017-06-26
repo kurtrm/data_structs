@@ -3,7 +3,7 @@ from setuptools import setup
 
 
 extra_packages = {
-    'testing': ['pytest-cov']
+    'testing': ['pytest-watch', 'pytest-cov']
 }
 
 
