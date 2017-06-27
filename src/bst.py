@@ -174,12 +174,14 @@ class BinTree(object):
         while start:
             direction = self.balance(start)
             if direction > 1:
-                if val < start.val and val > start.left.val:
+                # if val < start.val and val > start.left.val:
+                if start.left.right:
                     start = self.rotate_rightleft(start)
                 else:
                     start = self.rotate_right(start)
             elif direction < -1:
-                if val > start.val and val < start.right.val:
+                # if val > start.val and val < start.right.val:
+                if start.right.left:
                     start = self.rotate_leftright(start)
                 elif start.right.left and start is self._root:
                     # import pdb; pdb.set_trace()
@@ -226,8 +228,6 @@ class BinTree(object):
                 start.parent.left = rotate_to
         start.parent = rotate_to
         rotate_to.left = start
-        if rotate_to is not self._root:
-            rotate_to.parent.right = rotate_to
         rotate_to.right.parent = rotate_to
         rotate_to.left.right = temp_left
         rotate_to.right.left = temp_right
@@ -270,8 +270,6 @@ class BinTree(object):
                 start.parent.left = rotate_to
         start.parent = rotate_to
         rotate_to.right = start
-        rotate_to.right = start
-        rotate_to.parent.left = rotate_to
         rotate_to.left.parent = rotate_to
         rotate_to.right.left = temp_left
         rotate_to.left.right = temp_right
