@@ -7,7 +7,7 @@ import pytest
 @pytest.fixture
 def large_binary_tree():
     """For testing."""
-    from bst import BinTree
+    from balance_bst import BinTree
     beast = BinTree([45, 33, 1, 8, 93, 10, 63, 44, 99, 34, 79, 69, 25, 54, 83, 16, 94, 14, 49, 11])
     return beast
 
@@ -15,7 +15,7 @@ def large_binary_tree():
 @pytest.fixture
 def smaller_binary_tree():
     """For more testing."""
-    from bst import BinTree
+    from balance_bst import BinTree
     beast = BinTree([10, 5, 11, 13, 4, 6, 12, 20, 21, 7])
     return beast
 
@@ -23,7 +23,7 @@ def smaller_binary_tree():
 @pytest.fixture
 def empty_bst():
     """For more testing."""
-    from bst import BinTree
+    from balance_bst import BinTree
     beast = BinTree()
     return beast
 
@@ -36,7 +36,7 @@ def test_initiate_one(empty_bst):
 
 def test_intiate_small():
     """."""
-    from bst import BinTree
+    from balance_bst import BinTree
     beast = BinTree([10, 9, 8, 7, 6])
     assert beast.balance() == 1
     assert beast._root.left.val == 7
@@ -45,7 +45,7 @@ def test_intiate_small():
 
 # def test_initiate_big():
 #     """."""
-#     from bst import BinTree
+#     from balance_bst import BinTree
 #     beast = BinTree([1, 2, 3, 4, 5, 6])
 #     assert beast.balance() == 0
 #     assert beast._root.val == 4
@@ -162,29 +162,29 @@ def test_delete_from_small_rebalance(smaller_binary_tree):
     smaller_binary_tree.delete(13)
     smaller_binary_tree.delete(20)
     smaller_binary_tree.delete(21)
-    smaller_binary_tree._root.val == 6
-    smaller_binary_tree.balance(smaller_binary_tree._root.right) == 0
-    smaller_binary_tree._root.right.val == 10
-    smaller_binary_tree.left.val == 5
+    assert smaller_binary_tree._root.val == 6
+    assert smaller_binary_tree.balance(smaller_binary_tree._root.right) == 0
+    assert smaller_binary_tree._root.right.val == 10
+    assert smaller_binary_tree._root.left.val == 5
 
 
-# def test_delete_from_large_stay_balanced(large_binary_tree):
-#     """Ensure it stays balanced."""
-#     assert large_binary_tree.balance() == 0
-#     large_binary_tree.delete(45)
-#     large_binary_tree.delete(79)
-#     large_binary_tree.delete(99)
-#     large_binary_tree.delete(44)
-#     large_binary_tree.delete(63)
-#     assert large_binary_tree.balance() == 1
+def test_delete_from_large_stay_balanced(large_binary_tree):
+    """Ensure it stays balanced."""
+    assert large_binary_tree.balance() == 0
+    large_binary_tree.delete(45)
+    large_binary_tree.delete(79)
+    large_binary_tree.delete(99)
+    large_binary_tree.delete(44)
+    large_binary_tree.delete(63)
+    assert large_binary_tree.balance() == 1
 
 
-# def test_delete_from_large_rebalance(large_binary_tree):
-#     """Ensure it rebalances."""
-#     large_binary_tree.delete(11)
-#     large_binary_tree.delete(1)
-#     large_binary_tree.delete(14)
-#     large_binary_tree.delete(25)
-#     assert large_binary_tree._root.val == 63
-#     assert large_binary_tree.balance() == 1
-#     assert large_binary_tree.balance(large_binary_tree._root.left.right) == -1
+def test_delete_from_large_rebalance(large_binary_tree):
+    """Ensure it rebalances."""
+    large_binary_tree.delete(11)
+    large_binary_tree.delete(1)
+    large_binary_tree.delete(14)
+    large_binary_tree.delete(25)
+    assert large_binary_tree._root.val == 63
+    assert large_binary_tree.balance() == 1
+    assert large_binary_tree.balance(large_binary_tree._root.left.right) == -1
