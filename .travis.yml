@@ -12,6 +12,6 @@ install:
   - pip install python-coveralls
 # command to run tests
 script: 
-  - py.test src/test_balance.py --cov=src/test_balance.py
+  - py.test src --cov=src
 after_success:
   - coveralls

@@ -126,7 +126,7 @@ def test_insert_small_many_and_force_rebalance_hard_right(smaller_binary_tree):
 
 def test_insert_into_balanced_large(large_binary_tree):
     """Ensure stays balanced when we expect a larger to to stay balnced."""
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     assert large_binary_tree.balance(large_binary_tree._root.left.left) == -1
     large_binary_tree.insert(27)
     large_binary_tree.insert(9)
