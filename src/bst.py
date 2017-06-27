@@ -42,7 +42,7 @@ class BinTree(object):
                     else:
                         curr.right = Node(val, parent=curr)
                         self._size += 1
-                        self.rebalance(curr, val)
+                        self.rebalance(curr)
                         return
                 elif val < curr.val:
                     # import pdb; pdb.set_trace()
@@ -52,7 +52,7 @@ class BinTree(object):
                     else:
                         curr.left = Node(val, parent=curr)
                         self._size += 1
-                        self.rebalance(curr, val)
+                        self.rebalance(curr)
                         return
                 else:
                     return
@@ -151,40 +151,35 @@ class BinTree(object):
                 small.parent.right = small.left
                 if small.left:
                     small.left.parent = small.parent
-                self.rebalance(small.parent, val)
+                self.rebalance(small.parent)
             elif start.left:
                 start.val = start.left.val
                 tmp_r = start.left.right
                 tmp_l = start.left.left
                 start.right = tmp_r
                 start.left = tmp_l
-                self.rebalance(start.parent, val)
+                self.rebalance(start.parent)
             elif start.right:
                 start.val = start.right.val
                 tmp_r = start.right.right
                 tmp_l = start.right.left
                 start.right = tmp_r
                 start.left = tmp_l
-                self.rebalance(start.parent, val)
+                self.rebalance(start.parent)
             self._size -= 1
         return None
 
-    def rebalance(self, start, val):
+    def rebalance(self, start):
         """Rebalance the BST every time it is modified."""
         while start:
             direction = self.balance(start)
             if direction > 1:
-                # if val < start.val and val > start.left.val:
-                if start.left.right:
+                if self.balance(start.left) < 0:
                     start = self.rotate_rightleft(start)
                 else:
                     start = self.rotate_right(start)
             elif direction < -1:
-                # if val > start.val and val < start.right.val:
-                if start.right.left:
-                    start = self.rotate_leftright(start)
-                elif start.right.left and start is self._root:
-                    # import pdb; pdb.set_trace()
+                if self.balance(start.right) > 0:
                     start = self.rotate_leftright(start)
                 else:
                     start = self.rotate_left(start)
