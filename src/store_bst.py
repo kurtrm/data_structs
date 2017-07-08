@@ -123,75 +123,6 @@ class BinTree(object):
             r_depth = self.depth(start.right)
         return l_depth - r_depth
 
-    def delete(self, val):
-        """Delete a given value from the tree and re-order it."""
-        start = self.search(val)
-        if start:
-            is_root = True if start is self._root else False
-
-            if not start.left and not start.right:  # if no children
-                if is_root:
-                    self._root = None
-                else:
-                    if start.parent.val > start.val:
-                        start.parent.left = None
-                    else:
-                        start.parent.right = None
-                    self.rebalance(start.parent)
-            elif start.left and start.right:  # two children
-                if self.balance(start) < 0:
-                    small = start.right
-                    is_left = False
-                    while small.left:
-                        small = small.left
-                        is_left = True
-                    start.val = small.val
-                    start.store = small.val
-                    if is_left:
-                        small.parent.left = small.right
-                        if small.right:
-                            small.right.parent = small.parent
-                    else:
-                        start.right = small.right
-                        if small.right:
-                            small.right.parent = start
-                    self.rebalance(small)
-                else:
-                    small = start.left
-                    is_right = False
-                    while small.right:
-                        small = small.right
-                        is_right = True
-                    start.val = small.val
-                    start.store = small.store
-                    if is_right:
-                        small.parent.right = small.left
-                        if small.left:
-                            small.left.parent = small.parent
-                    else:
-                        start.left = small.left
-                        if small.left:
-                            small.left.parent = start
-                    self.rebalance(small)
-            elif start.left:
-                start.val = start.left.val
-                start.store = start.left.store
-                tmp_r = start.left.right
-                tmp_l = start.left.left
-                start.right = tmp_r
-                start.left = tmp_l
-                self.rebalance(start)
-            elif start.right:
-                start.val = start.right.val
-                start.store = start.right.store
-                tmp_r = start.right.right
-                tmp_l = start.right.left
-                start.right = tmp_r
-                start.left = tmp_l
-                self.rebalance(start)
-            self._size -= 1
-        return None
-
     def rebalance(self, start):
         """Rebalance the BST every time it is modified."""
         while start:
@@ -247,7 +178,11 @@ class BinTree(object):
         rotate_to.left = start
         rotate_to.right.parent = rotate_to
         rotate_to.left.right = temp_left
+        if temp_left:
+            temp_left.parent = rotate_to.left
         rotate_to.right.left = temp_right
+        if temp_right:
+            temp_right.parent = rotate_to.right
         start = start.parent
         return start
 
@@ -288,6 +223,10 @@ class BinTree(object):
         rotate_to.right = start
         rotate_to.left.parent = rotate_to
         rotate_to.right.left = temp_right
+        if temp_right:
+            temp_right.parent = rotate_to.right
         rotate_to.left.right = temp_left
+        if temp_left:
+            temp_left.parent = rotate_to.left
         start = start.parent
         return start

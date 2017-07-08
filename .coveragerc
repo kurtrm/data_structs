@@ -1,9 +1,13 @@
 [run]
 source = 
-    src/
+    src/hash_table.py
 omit = 
+    src/balance_bst.py
+    src/bst.py
+    src/store_bst.py
     src/test_balance.py
     src/test_bst.py
+    src/test_hash_table.py
     src/test_traversals.py
 [report]
 show_missing = True

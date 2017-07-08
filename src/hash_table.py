@@ -20,10 +20,9 @@ class HashTable(object):
             raise ValueError("Size must be 512 or greater.")
         else:
             self.table = [None] * size
-
         if hash == 'complex':
             self.hash = 1
-        if hash == 'naive':
+        elif hash == 'naive':
             self.hash = 2
         else:
             raise ValueError("Specified hash must be either 'complex' or 'naive'.")
@@ -53,28 +52,20 @@ class HashTable(object):
         hash = self._hash(key)
         idx = hash % len(self.table)
         the_val = self.table[idx]
-        if not the_val:
-            return None
-        if isinstance(the_val, tuple):
-            return the_val[1]
-        else:
+        if the_val:
             return the_val.search(hash).store
+        return None
 
     def set(self, key, val):
         """Store the value using the key."""
         hash = self._hash(key)
         idx = hash % len(self.table)
         if not self.table[idx]:
-            self.table[idx] = (hash, val)
+            tree = BinTree()
+            tree.insert(hash, val)
+            self.table[idx] = tree
         else:
-            existing = self.table[idx]
-            if isinstance(existing, BinTree):
-                existing.insert(hash, val)
-            else:
-                tree = BinTree()
-                tree.insert(existing[0], existing[1])
-                tree.insert(hash, val)
-                self.table[idx] = tree
+            self.table[idx].insert(hash, val)
 
     def _hash(self, key):
         """Hash the provided key and return the hash."""
