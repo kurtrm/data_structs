@@ -4,7 +4,7 @@ import pytest
 
 with open('/usr/share/dict/words') as dictionary:
     words = dictionary.read()
-    list_words = words.split('\n')
+    list_words = words.split('\n')[:5000]
 
 
 @pytest.fixture
