@@ -80,6 +80,11 @@ def test_naive_hash_causes_many_collisions():
 
 
 @pytest.mark.parametrize('word', random_words)
-def test_parametrize_works_as_expected(word, complex_hash_table):
-    """Test that parametrize works as expected."""
+def test_that_we_get_correct_words(word, complex_hash_table):
+    """."""
     assert complex_hash_table.get(word) == word
+
+
+def test_that_we_get_none_if_key_not_found(complex_hash_table):
+    """Test that parametrize works as expected."""
+    assert complex_hash_table.get("Supercalifragilistic") is None

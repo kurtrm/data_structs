@@ -53,8 +53,9 @@ class HashTable(object):
         idx = hash_value % len(self.table)
         the_val = self.table[idx]
         if the_val:
-            return the_val.search(hash_value).store
-        return None
+            result = the_val.search(hash_value)
+            if result:
+                return result.store
 
     def set(self, key, val):
         """Store the value using the key."""
