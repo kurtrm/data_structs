@@ -1,5 +1,9 @@
 """Implement binary search tree."""
-
+import sys
+'''We have to check Python versions here due to 
+the large numbers generated. Python2 will automatically make
+them of type 'long'. This doesn't work in Python3 and will
+cause it to fail.'''
 
 class Node(object):
     """Implement a node of a BST."""
@@ -20,10 +24,14 @@ class BinTree(object):
         """Instantiate a new BST."""
         self._root = None
         self._size = 0
+        if sys.version_info < (3,):
+            self._types = [float, int, long]
+        else:
+            self._types = [float, int]
 
     def insert(self, val, store):
         """Insert a value into a BST."""
-        if type(val) not in [int, float]:
+        if type(val) not in self._types:
             raise ValueError('Please insert only integers or floats')
         if not self._root:
             self._root = Node(val, store)
@@ -54,7 +62,7 @@ class BinTree(object):
 
     def search(self, val):
         """Insert a value into a BST."""
-        if type(val) not in [int, float]:
+        if type(val) not in self._types:
             raise ValueError('BST is only made of numbers')
         if not self._root:
             return None
