@@ -248,7 +248,11 @@ class BinTree(object):
         rotate_to.left = start
         rotate_to.right.parent = rotate_to
         rotate_to.left.right = temp_left
+        if temp_left:
+            temp_left.parent = rotate_to.left
         rotate_to.right.left = temp_right
+        if temp_right:
+            temp_right.parent = rotate_to.right
         start = start.parent
         return start
 
@@ -289,7 +293,11 @@ class BinTree(object):
         rotate_to.right = start
         rotate_to.left.parent = rotate_to
         rotate_to.right.left = temp_right
+        if temp_right:
+            temp_right.parent = rotate_to.right
         rotate_to.left.right = temp_left
+        if temp_left:
+            temp_left.parent = rotate_to.left
         start = start.parent
         return start
 
