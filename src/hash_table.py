@@ -15,7 +15,7 @@ class HashTable(object):
             hash = 'complex'
 
         if type(size) not in (float, int):
-            raise ValueError("Size of hash must be a positive integer, larger than 512.")
+            raise TypeError("Size of hash must be a positive integer, larger than 512.")
         elif size < 512:
             raise ValueError("Size must be 512 or greater.")
         else:
