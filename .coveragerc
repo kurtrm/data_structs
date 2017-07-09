@@ -1,0 +1,9 @@
+[run]
+source = 
+    src/
+omit = 
+    src/test_balance.py
+    src/test_bst.py
+    src/test_traversals.py
+[report]
+show_missing = True
