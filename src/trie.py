@@ -74,3 +74,27 @@ class Trie(object):
                     break
                 else:
                     curr = curr[char]
+
+    def traversal(self, start, last=None):
+        """Perform a DFT of the trie from a specified start."""
+        if not isinstance(start, str):
+            raise TypeError('Traversal takes in one param which must be a string')
+        if not start or start == '':
+            raise ValueError('Please enter a string')
+        if not last:
+            curr = self._base
+            for idx, char in enumerate(start):
+                if idx == (len(start) - 1) and char in curr:
+                    yield start
+                    curr = curr[char]
+                    self.traversal(start, curr)
+                elif char in curr:
+                    curr = curr[char]
+                else:
+                    raise ValueError('String not in trie')
+        else:
+            for char in last:
+                if not char == '$':
+                    yield char
+                    for each_char in self.traversal(start, last[char]):
+                        yield each_char
