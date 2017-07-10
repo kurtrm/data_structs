@@ -62,4 +62,10 @@ class Trie(object):
         if not self.contains(word):
             raise ValueError('String not in trie')
         else:
-            pass
+            curr = self._base
+            last_word = {}
+            for idx, char in enumerate(word):
+                if '$' in curr:
+                    last_word = curr
+                if idx == (len(word) - 1):
+                    pass
