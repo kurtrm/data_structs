@@ -12,7 +12,7 @@ class Trie(object):
     def insert(self, word):
         """Insert an input string into the trie."""
         if not isinstance(word, str):
-            raise TypeError('Insert takes in one parameter which must be a string')
+            raise TypeError('Insert takes in one param which must be a string')
         if not word or word == '':
             raise ValueError('Please enter a string')
 
@@ -34,7 +34,7 @@ class Trie(object):
     def contains(self, word):
         """Check to see if a given word is contained in the trie."""
         if not isinstance(word, str):
-            raise TypeError('Contains takes in one parameter which must be a string')
+            raise TypeError('Contains takes in one param which must be a string')
         if not word or word == '':
             raise ValueError('Please enter a string')
 
@@ -55,7 +55,7 @@ class Trie(object):
     def remove(self, word):
         """Remove the specified word from the trie."""
         if not isinstance(word, str):
-            raise TypeError('Remove takes in one parameter which must be a string')
+            raise TypeError('Remove takes in one param which must be a string')
         if not word or word == '':
             raise ValueError('Please enter a string')
 
@@ -63,9 +63,14 @@ class Trie(object):
             raise ValueError('String not in trie')
         else:
             curr = self._base
-            last_word = {}
+            last_word = curr
+            next_letter = word[0]
             for idx, char in enumerate(word):
-                if '$' in curr:
+                if '$' in curr and not idx == (len(word) - 1):
                     last_word = curr
-                if idx == (len(word) - 1):
-                    pass
+                    next_letter = word[idx + 1]
+                elif idx == (len(word) - 1):
+                    del last_word[next_letter]
+                    break
+                else:
+                    curr = curr[char]
