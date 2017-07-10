@@ -40,7 +40,7 @@ class Trie(object):
 
         curr = self._base
         for idx, char in enumerate(word):
-            if idx == (len(word) - 1) and char in curr:
+            if idx == (len(word) - 1) and char in curr and '$' in curr[char]:
                 return True
             elif char in curr:
                 curr = curr[char]
@@ -62,3 +62,4 @@ class Trie(object):
         if not self.contains(word):
             raise ValueError('String not in trie')
         else:
+            pass
