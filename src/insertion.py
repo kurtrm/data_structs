@@ -16,8 +16,8 @@ def insertion_sort(iter):
             if iter[countdown - 1] > move:
                 next_largest = countdown - 1
             countdown -= 1
-        iter.insert(next_largest, move)
         del iter[idx]
+        iter.insert(next_largest, move)
     return iter
 
 
