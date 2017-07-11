@@ -11,8 +11,14 @@ def insertion_sort(iter):
     for idx in range(len(iter)):
         move = iter[idx]
         countdown = idx
+        next_largest = None
         while countdown > 0:
-            pass
+            if iter[countdown - 1] > move:
+                next_largest = countdown - 1
+            countdown -= 1
+        if next_largest:
+            iter[next_largest] = iter[idx]
+            del iter[idx]
     return iter
 
 
