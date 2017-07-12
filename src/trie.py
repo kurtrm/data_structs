@@ -66,12 +66,13 @@ class Trie(object):
             last_word = curr
             next_letter = word[0]
             for idx, char in enumerate(word):
-                if '$' in curr and not idx == (len(word) - 1):
-                    last_word = curr
+                if '$' in curr[char] and not idx == (len(word) - 1):
+                    last_word = curr[char]
                     next_letter = word[idx + 1]
+                    curr = curr[char]
                 elif idx == (len(word) - 1):
-                    if len(curr) > 1:
-                        del curr['$']
+                    if len(curr[char]) > 1:
+                        del curr[char]['$']
                     else:
                         del last_word[next_letter]
                         break
@@ -90,7 +91,11 @@ class Trie(object):
                 if idx == (len(start) - 1) and char in curr:
                     yield start
                     curr = curr[char]
-                    self.traversal(start, curr)
+                    for char in curr:
+                        if not char == '$':
+                            yield char
+                            for each_char in self.traversal(start, curr[char]):
+                                yield each_char
                 elif char in curr:
                     curr = curr[char]
                 else:
