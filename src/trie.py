@@ -70,8 +70,11 @@ class Trie(object):
                     last_word = curr
                     next_letter = word[idx + 1]
                 elif idx == (len(word) - 1):
-                    del last_word[next_letter]
-                    break
+                    if len(curr) > 1:
+                        del curr['$']
+                    else:
+                        del last_word[next_letter]
+                        break
                 else:
                     curr = curr[char]
 
