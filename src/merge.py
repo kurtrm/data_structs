@@ -3,6 +3,11 @@
 
 def merge_sort(iter):
     """Sort the iterable using the merge sort method."""
+    if not isinstance(iter, (list, tuple)):
+        raise TypeError("Input only a list/tuple of integers")
+    if not all(isinstance(x, (int, float)) for x in iter):
+        raise ValueError("Input only a list/tuple of integers")
+
     if len(iter) == 1:
         return iter
     if len(iter) == 2:
