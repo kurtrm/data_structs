@@ -1,6 +1,6 @@
 
-[![Build Status](https://travis-ci.org/kurtrm/data_structs.svg?branch=balancing-bst)](https://travis-ci.org/kurtrm/data_structs)
-[![Coverage Status](https://coveralls.io/repos/github/kurtrm/data_structs/badge.svg?branch=balancing-bst)](https://coveralls.io/github/kurtrm/data_structs?branch=balancing-bst)
+[![Build Status](https://travis-ci.org/kurtrm/data_structs.svg?branch=master)](https://travis-ci.org/kurtrm/data_structs)
+[![Coverage Status](https://coveralls.io/repos/github/kurtrm/data_structs/badge.svg?branch=master)](https://coveralls.io/github/kurtrm/data_structs?branch=master)
 
 
 ##More Data Structures for Python 401
@@ -21,4 +21,4 @@ Implement the following traversals:
 
 https://en.wikipedia.org/wiki/Tree_traversal
 
-Each returns a generator that will yield nodes according to their conventions.
+Each returns a generator that will yield nodes according to their conventions
