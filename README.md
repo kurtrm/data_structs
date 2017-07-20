@@ -2,7 +2,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/kurtrm/data_structs/badge.svg?branch=master)](https://coveralls.io/github/kurtrm/data_structs?branch=master)
 
 
-
 #More Data Structures for Python 401
 
 
@@ -42,4 +41,3 @@ Contains an implementation of a trie, along with traversals and an autocomplete 
 
 + Traversal - O(n), where n is the number of letters in the sub-trie branching from the input string
 + Autocomplete - O(n), where n is the number of letters in the sub-trie branching from the input string
-
