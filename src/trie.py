@@ -106,3 +106,34 @@ class Trie(object):
                     yield char
                     for each_char in self.traversal(start, last[char]):
                         yield each_char
+
+    def autocomplete(self, start, last=None):
+        """Autocomplete a string with all possible words."""
+        if not isinstance(start, str):
+            raise TypeError('Traversal takes in one param which must be a string')
+        if not start or start == '':
+            raise ValueError('Please enter a string')
+        words = []
+        if not last:
+            curr = self._base
+            for idx, char in enumerate(start):
+                if idx == (len(start) - 1) and char in curr:
+                    curr = curr[char]
+                    for char in curr:
+                        if char == '$':
+                            words.append(start)
+                        if not char == '$':
+                            next = start + char
+                            words.extend(self.autocomplete(next, curr[char]))
+                elif char in curr:
+                    curr = curr[char]
+                else:
+                    raise ValueError('String not in trie')
+        else:
+            for char in last:
+                if char == '$':
+                    words.append(start)
+                if not char == '$':
+                    next = start + char
+                    words.extend(self.autocomplete(next, curr[char]))
+        return words
