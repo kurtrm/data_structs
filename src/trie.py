@@ -135,5 +135,5 @@ class Trie(object):
                     words.append(start)
                 if not char == '$':
                     next = start + char
-                    words.extend(self.autocomplete(next, curr[char]))
+                    words.extend(self.autocomplete(next, last[char]))
         return words

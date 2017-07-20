@@ -84,6 +84,34 @@ def test_traversal(test_trie):
     assert len(ret_string) == len('starstsirs')
 
 
+def test_autocomplete(test_trie):
+    """Test the autocomplete method."""
+    test_trie.insert('star')
+    test_trie.insert('stars')
+    test_trie.insert('start')
+    test_trie.insert('starts')
+    test_trie.insert('stairs')
+    test_trie.insert('stair')
+    test_trie.insert('stop')
+    ret_list = ['star', 'stars', 'start', 'starts', 'stairs', 'stair', 'stop']
+    for word in ret_list:
+        assert word in test_trie.autocomplete('st')
+
+
+def test_autocomplete_does_not_return_non_words(test_trie):
+    """Test that autocomplete does not return word stubs."""
+    test_trie.insert('star')
+    test_trie.insert('stars')
+    test_trie.insert('start')
+    test_trie.insert('starts')
+    test_trie.insert('stairs')
+    test_trie.insert('stair')
+    test_trie.insert('stop')
+    ret_list = ['st', 'sta', 'stai', 'sto']
+    for word in ret_list:
+        assert word not in test_trie.autocomplete('st')
+
+
 def test_insert_not_string(test_trie):
     """Test that you can't put anything but a string in there."""
     with pytest.raises(TypeError):
@@ -143,3 +171,22 @@ def test_traversal_checks_contains_word(test_trie):
     test_trie.insert('starts')
     with pytest.raises(ValueError):
         next(test_trie.traversal('banana'))
+
+
+def test_autocomplete_not_string(test_trie):
+    """Test that you can't pass anything but a string in there."""
+    with pytest.raises(TypeError):
+        next(test_trie.autocomplete(True))
+
+
+def test_autocomplete_empty_string(test_trie):
+    """Test it won't accept empty string."""
+    with pytest.raises(ValueError):
+        next(test_trie.autocomplete(''))
+
+
+def test_autocomplete_checks_contains_word(test_trie):
+    """Test that a value error is raised if word not in trie."""
+    test_trie.insert('starts')
+    with pytest.raises(ValueError):
+        next(test_trie.autocomplete('banana'))
